@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ariya.task1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    var count: Int = 0
+    var count: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +29,14 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.switchBtn.setOnClickListener {
-            if (count % 2 == 0) {
+            if (count) {
                 binding.listview.layoutManager = LinearLayoutManager(this)
-                count++
-            } else if (count % 2 != 0) {
+                binding.switchBtn.setText("switch to grid layout")
+                count=false
+            } else if (!count) {
                 binding.listview.layoutManager = GridLayoutManager(this, 2)
-                count++
+                binding.switchBtn.setText("switch to linear layout")
+                count=true
             }
         }
         val Adapter = Adapter(this, items)
